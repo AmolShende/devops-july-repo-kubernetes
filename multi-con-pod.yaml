@@ -1,0 +1,41 @@
+
+#POD defination. This POD contains two conatiner
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod-multcon
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name:  con1
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+  - name: con2
+    image: tomcat
+    ports:
+    - containerPort: 8080
+---               # YAML seprator
+#Service Defination
+apiVersion: v1
+kind: Service
+metadata:
+  name: mypod-multcon-svc
+spec:
+  type: NodePort
+  selector:                   #Will select POD with given label
+    app: myapp
+  ports:
+  - name: nginx
+    port: 80                  #Port on Service itself
+    nodePort: 32300
+    targetPort: 80            #Port on the container
+    protocol: TCP             #Majour Protocol
+
+  - name: tomcat
+    port: 8080
+    nodePort: 32301
+    targetPort: 8080
+    protocol: TCP
+
