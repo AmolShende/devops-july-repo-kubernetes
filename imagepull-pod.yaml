@@ -3,10 +3,10 @@ kind: Pod
 metadata:
   name: mypod
   labels:
-    run: mypod
+    app: myapp
 spec:
   containers:
-  - name: mypod
-    image: nginx:latest
+  - name: con1
+    image: ngasfhalsfkinx:latest
     ports:
     - containerPort: 80

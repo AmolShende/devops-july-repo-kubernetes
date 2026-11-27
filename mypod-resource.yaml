@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    run: mypod
+spec:
+  containers:
+  - name: con1
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+  - name: con2
+    image: tomcat:latest
+    resources:
+      requests:             #Min resources required to create container
+        memory: "64Mi"
+        cpu: "250m"
+      limits:               #Max resource this container can use
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+
